@@ -58,6 +58,9 @@
 
         DelayValueCheck(txtTrans, async (value) => {
             txtChat.value = await translate(value, null, "EN");
+            const evt = new Event('input', { bubbles: true });
+            evt.break = true;
+            txtChat.dispatchEvent(evt);
         });
         DelayValueCheck(txtChat, async (value) => {
             txtTrans.value = await translate(value, null, "KO");
@@ -74,8 +77,8 @@
                 callback(current);
             }
             changed = false;
-        }, 2000);
-        input.addEventListener("input", (evt) => changed = true);
+        }, 1000);
+        input.addEventListener("input", (evt) => changed = changed || !evt.break);
     }
 })();
 
