@@ -1,0 +1,36 @@
+{
+    "manifest_version": 2,
+    "name": "RISU Trans",
+    "version": "1.0",
+    "icons": {
+        "48": "icons/48.png",
+        "96": "icons/96.png"
+    },
+    "permissions": [
+        "webRequest",
+        "webRequestBlocking",
+        "*://www.deepl.com/translator*",
+        "*://risuai.xyz/*"
+    ],
+    "page_action": {
+        "default_icon": "icons/geo.png",
+        "show_matches": ["*://risuai.xyz/*"]
+    },
+    "content_scripts": [{
+        "matches": ["*://risuai.xyz/*"],
+        "run_at": "document_end",
+        "js": ["scripts/risu_ext.js"]
+    }, {
+        "matches": ["*://www.deepl.com/translator*"],
+        "all_frames": true,
+        "run_at": "document_idle",
+        "js": ["scripts/deepl_ext.js"]
+    }],
+    "background": {
+        "scripts": ["scripts/main.js"]
+    },
+    "web_accessible_resources": [
+        "scripts/risu.js",
+        "scripts/deepl.js"
+    ]
+}
